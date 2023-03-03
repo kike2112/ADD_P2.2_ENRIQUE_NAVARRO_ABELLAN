@@ -1,0 +1,223 @@
+body {
+    background-color: rgb(43, 73, 89);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    margin: 0px;
+}
+main {
+    max-width: 900px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 50px;
+    color: rgb(107, 156, 197);
+}
+header {
+	z-index: 9999;
+}
+.ventana {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    margin: auto;
+    min-width: 402px;
+    max-width: 402px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgb(188, 225, 250);
+}
+.caja-texto {
+    margin-top: 3px;
+    width: 250px;
+    padding: 10px;
+    border-style: groove;
+    font-size: large;
+
+}
+.titulo {
+    text-align: center;
+}
+fieldset {
+    width: 250px;
+    margin: auto;
+    border-radius: 10px;
+    border: 0px;
+    padding: 0px;
+}
+.campo {
+    margin-bottom: 20px;
+}
+.bienvenida {
+    text-align: center;
+}
+form {
+    margin-bottom: 0px;
+}
+
+.botones2 {
+    display: inline-flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    width: 274px;
+    margin-top: 0px;
+}
+.botones1 {
+    display: inline-flex;
+    justify-content: center;
+    width: 250px;
+    padding-top: 20px;
+}
+.boton {
+    background-color:rgb(114, 166, 209);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    min-width: 123px;
+    border-radius: 5px;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: rgb(210, 241, 255);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgb(188, 225, 250);
+}
+.boton:hover {
+    background-color: rgb(210, 241, 255);
+    color: #4e88f3;
+}
+input {
+    border-color: #4e88f3;
+}
+.error {
+    color: rgb(255, 55, 55);
+    text-align: right;
+    font-size: small;
+    margin-top: -20px;
+    margin-bottom: 0px;
+}
+.registro {
+    position: absolute;
+    color: rgb(107, 156, 197);
+    text-align: right;
+    font-size: small;
+    margin-top: -20px;
+    margin-bottom: 0px;
+}
+.campomini {
+    display: flex;
+    justify-content: flex-end;
+}
+span {
+	color: rgb(255, 55, 55);
+}
+
+
+
+
+
+/*Quita la decoración y algunos atrivutos que "a" y "ul" tienen por defecto*/
+a {
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+    padding: 0px;
+}
+/*margen a la izq de los iconos para que no se peguen*/
+.opcion-cabecera {
+    margin-left: 25px;
+    color: rgb(114, 166, 209);
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+}
+.opcion-cabecera:hover {
+    color: rgb(43, 43, 59);
+    background-color: rgb(114, 166, 209);
+}
+/*display flex para contener elementos en línea y poder separarlos a los bordes
+de la ventana. con anchura máxima de 1200*/
+.contenedor {
+    display: flex;
+    justify-content: center;
+}
+.contenido{
+    display: inline-flex;
+    justify-content: space-between;
+    width: 1200px;
+}
+/*Altura, color y margen de una parte de la cabecera que contiene el logo y un 
+par de iconos*/
+#cabecera-container {
+    margin: 0px;
+    background-color: rgb(43, 43, 59);
+    height: 100px;
+}
+#cabecera {
+    align-items: center;
+    margin-right: 20px;
+    margin-left: 15px;
+}
+header {
+    position: sticky;
+    top: 0px;
+}
+.pre-nav {
+    height: 5px;
+    background-color: rgb(114, 166, 209);
+    position: sticky;
+    top: 100px;
+}
+
+
+/*dentro de nav va todo el menú. Stycky hace que se quede pegado al borde superior
+de la ventana aunque se baje el scroll*/
+nav {
+    position: sticky;
+    top: 100px;
+}
+/*Da color y altura a toda la línea de menú*/
+#menu-container {
+    background-color: rgb(114, 166, 209);
+}
+/*Alinéa el ancho y alto del div*/
+#menu {
+    text-align: center;
+    width: auto;
+
+}
+/*Características principales de los enlaces dentro de menú y submenú*/
+#menu li a {
+	margin: 25px;
+    padding: 18px;
+    color: rgb(210, 241, 255);
+    font-size: 18px;
+}
+/*Al pasar el ratón por encima de los enlaces de menú cambia dos características*/
+#menu li a:hover {
+    color: rgb(114, 166, 209);
+    background-color: rgb(43, 43, 59);
+}
+
+
+
+/*da color y ancho a todo el pie de página*/
+footer {
+    background-color: rgb(43, 43, 59);
+    height: 100px;
+    width: 100%;
+    position:fixed; bottom:0; z-index:999999;
+}
+/*da color y ancho a una línea previa al pie de página*/
+.pre-foot {
+    height: 5px;
+    background-color: rgb(114, 166, 209);
+}
+/*Especifica la medida y los márgenes los contenedores*/
+#container-datos{
+    margin-top: 20px;
+}
+h3 {
+    margin-top: 0px;
+    color: rgb(210, 241, 255);
+}

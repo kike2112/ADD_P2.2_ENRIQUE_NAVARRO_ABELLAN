@@ -1,0 +1,78 @@
+main {
+    max-width: 1200px;
+    margin: auto;
+}
+.contactos {
+    display:grid;
+    grid-template-columns: auto;
+    gap: 0px;
+    margin-bottom: 41px;
+}
+.contacto {
+    display:inline-grid;
+    grid-template-columns: max-content auto 50%;
+    column-gap: 20px;
+    padding: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(188, 225, 250);
+    border-top: 1px solid rgb(188, 225, 250);
+}
+.c_datos {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    margin-right: 20px;
+}
+.c_datos2 {
+    position:relative;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    min-width: 150px;
+}
+.c_datos3 {
+    position:relative;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+.c_fin {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    margin-right: 20px;
+}
+.botones-lis {
+    display: inline-flex;
+    justify-content: space-between;
+    padding-top: 17px;
+    width: 274px;
+    margin-top: 0px;
+}
+.boton-bus {
+    display: inline-flex;
+    justify-content: center;
+    padding-top: 13px;
+    padding-bottom: 24px;
+    width: 274px;
+}
+.id {
+    font-size: 10px;
+}
+.nombre {
+    font-size: larger;
+}
+.nombre-bus {
+    margin-top: 21px;
+    justify-content: right;
+}
+.caja-busqueda {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    width: 540px;
+    padding: 10px;
+    border-style: groove;
+    font-size: large;
+}
+.linea-busqueda {
+	height: 5px;
+    background-color: rgb(114, 166, 209);
+}
