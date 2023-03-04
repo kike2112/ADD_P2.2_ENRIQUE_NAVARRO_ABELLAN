@@ -1,16 +1,45 @@
 package dam2.add.p22.modelo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "usuario")
 public class Usuario {
 
-	private String id_us;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(name = "nombre", length = 50)
 	private String nombre;
+	
+	@Column(name = "apellido", length = 255)
 	private String apellido;
+	
+	@Column(name = "apellido2", length = 255)
 	private String apellido2;
+	
+	@Column(name = "email", length = 255, unique = true)
 	private String email;
+	
+	@Column(name = "telefono", length = 50)
 	private String telefono;
+	
+	@Column(name = "pass", length = 255)
 	private String pass;
+	
+	@Column(name = "intentos")
 	private int intentos;
+	
+	@Column(name = "rolAdmin")
 	private boolean rolAdmin;
+	
+	@Column(name = "idioma", length = 50)
 	private String idioma;
 	
 	public Usuario() {
@@ -43,10 +72,10 @@ public class Usuario {
 		this.rolAdmin = rolAdmin;
 		this.intentos = intentos;
 	}
-	public Usuario(String id_us, String nombre, String apellido, String apellido2, String email, String telefono,
+	public Usuario(int id, String nombre, String apellido, String apellido2, String email, String telefono,
 			String pass, boolean rolAdmin, int intentos) {
 		super();
-		this.id_us = id_us;
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.apellido2 = apellido2;
@@ -56,10 +85,10 @@ public class Usuario {
 		this.rolAdmin = rolAdmin;
 		this.intentos = intentos;
 	}
-	public Usuario(String id_us, String nombre, String apellido, String apellido2, String email, String telefono,
+	public Usuario(int id, String nombre, String apellido, String apellido2, String email, String telefono,
 			String pass, boolean rolAdmin, int intentos, String idioma) {
 		super();
-		this.id_us = id_us;
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.apellido2 = apellido2;
@@ -79,11 +108,11 @@ public class Usuario {
 		this.email = email;
 		this.telefono = telefono;
 	}
-	public String getId_us() {
-		return id_us;
+	public int getId_us() {
+		return id;
 	}
-	public void setId_us(String id_us) {
-		this.id_us = id_us;
+	public void setId_us(int id) {
+		this.id = id;
 	}
 	public String getNombre() {
 		return nombre;

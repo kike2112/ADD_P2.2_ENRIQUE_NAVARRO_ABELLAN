@@ -8,6 +8,7 @@
     pageEncoding="UTF-8"%>
 <%
     Usuario usuarioP = (Usuario) request.getSession().getAttribute("usuario");
+    int id_us = usuarioP.getId_us();
     String idiomaSesion = (String) request.getSession().getAttribute("idioma");
     if (idiomaSesion == null) {
         idiomaSesion = "";
@@ -27,7 +28,7 @@
 	    <div class="contacto">
 	        <div class="c_datos">
 	            <ul>
-	                <li class="id">id<%=usuarioP.getId_us()%></li>
+	                <li class="id">id<%=id_us%></li>
 	            </ul>
 	        </div>
 	        <div class="c_datos2">

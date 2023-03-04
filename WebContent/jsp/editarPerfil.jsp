@@ -8,6 +8,7 @@
     pageEncoding="UTF-8"%>
 <%
     Usuario usuarioEditable = (Usuario) request.getSession().getAttribute("usuarioEditable");
+    int id_us = usuarioEditable.getId_us();
     String error_email = (String) request.getAttribute("error_email");
     String idiomaSesion = (String) request.getSession().getAttribute("idioma");
     if (idiomaSesion == null) {
@@ -32,7 +33,7 @@
     <div class="titulo">
         <h2><%=rb.getString("Cambiar_Datos")%></h2>
     </div>       
-    <form action="<%=request.getContextPath()%>/AccesoUsuario?opcion=editar&id_us=<%=usuarioEditable.getId_us()%>" method="post">
+    <form action="<%=request.getContextPath()%>/AccesoUsuario?opcion=editar&id_us=<%=id_us%>" method="post">
         <fieldset>   
             <div class="campo">
                 <label for="email"><%=rb.getString("Email")%>:<span>*</span></label>

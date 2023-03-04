@@ -38,7 +38,7 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 				boolean rolAdmin = rs.getBoolean(9);
 				String idioma = rs.getString(10);
 				
-				listaUsuarios.add(new Usuario(String.valueOf(id_us), nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma));
+				listaUsuarios.add(new Usuario(id_us, nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma));
 			}
 			rs.close();
 			ps.close();
@@ -51,7 +51,7 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 	}
 
 	@Override
-	public Usuario getUsuarioById(String id) {
+	public Usuario getUsuarioById(int id) {
 		conexion = Propiedades.getConexion();
 		Usuario usuario = null;
 		String query = "SELECT * FROM usuario WHERE id like ?";
@@ -60,7 +60,7 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 		PreparedStatement ps;
 		try {
 			ps = conexion.prepareStatement(query);
-			ps.setInt(1, Integer.parseInt(id));
+			ps.setInt(1, id);
 			
 			ResultSet rs = ps.executeQuery();
 			// Columnas de la tabla: nombre, apellidos, telefono,...
@@ -78,7 +78,7 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 				boolean rolAdmin = rs.getBoolean(9);
 				String idioma = rs.getString(10);
 				
-				usuario = new Usuario(String.valueOf(id_us), nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma);
+				usuario = new Usuario(id_us, nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma);
 			}
 			rs.close();
 			ps.close();
@@ -117,7 +117,7 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 				boolean rolAdmin = rs.getBoolean(9);
 				String idioma = rs.getString(10);
 				
-				usuario = new Usuario(String.valueOf(id_us), nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma);
+				usuario = new Usuario(id_us, nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma);
 			}
 			rs.close();
 			ps.close();
@@ -183,7 +183,7 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 			ps.setString(6, usuario.getPass());
 			ps.setInt(7, usuario.getIntentos());
 			ps.setString(8, usuario.getIdioma());
-			ps.setString(9, usuario.getId_us());
+			ps.setInt(9, usuario.getId_us());
 			
 			if (ps.executeUpdate() == 0) {
 				Propiedades.imprimeLog("e", "NO se ha podido actualizar");
@@ -202,7 +202,7 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 	}
 
 	@Override
-	public boolean borrarUsuario(String id_us) {
+	public boolean borrarUsuario(int id_us) {
 		boolean exito = false;
 		conexion = Propiedades.getConexion();
 		String query = "DELETE FROM usuario WHERE id=?";
@@ -211,7 +211,7 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 		PreparedStatement ps;
 		try {
 			ps = conexion.prepareStatement(query);
-			ps.setInt(1, Integer.parseInt(id_us));
+			ps.setInt(1, id_us);
 			
 			if (ps.executeUpdate() == 0) {
 				Propiedades.imprimeLog("w", "NO se ha podido borrar");

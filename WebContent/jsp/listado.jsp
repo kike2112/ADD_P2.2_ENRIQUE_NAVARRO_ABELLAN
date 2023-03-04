@@ -99,11 +99,12 @@
     </div>
 <%
    for (int i = 0; i < listaUsuarios.size();i++) {
+	   int id_us = listaUsuarios.get(i).getId_us();
 %>
     <div class="contacto">
         <div class="c_datos">
             <ul>
-                <li class="id">id<%=listaUsuarios.get(i).getId_us()%></li>
+                <li class="id">id<%=id_us%></li>
             </ul>
         </div>
         <div class="c_datos2">
@@ -128,10 +129,10 @@
 					<input type="hidden" id="id_us" name="id_us" value="< %=listaUsuarios.get(i).getId_us()%>"/>
 					<input class="boton" type="button" type="submit" value="Eliminar" onclick="return confirmaBorrar()"/>
 				</form> -->
-                <a href="<%=request.getContextPath()%>/AccesoUsuario?opcion=pintaEditar&id_us=<%=listaUsuarios.get(i).getId_us()%>">
+                <a href="<%=request.getContextPath()%>/AccesoUsuario?opcion=pintaEditar&id_us=<%=id_us%>">
                 <input class="boton" type="button" name="edit" value="<%=rb.getString("Editar")%>"/>
                 </a>
-                <a href="<%=request.getContextPath()%>/AccesoUsuario?opcion=eliminar&id_us=<%=listaUsuarios.get(i).getId_us()%>">
+                <a href="<%=request.getContextPath()%>/AccesoUsuario?opcion=eliminar&id_us=<%=id_us%>">
                 <input class="boton" type="button" name="delete" value="<%=rb.getString("Eliminar")%>" onclick="return confirmaBorrar()"/>
                 </a>
             </div>

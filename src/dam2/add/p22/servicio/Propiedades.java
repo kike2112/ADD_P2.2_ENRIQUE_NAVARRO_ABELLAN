@@ -1,6 +1,12 @@
 package dam2.add.p22.servicio;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +21,6 @@ import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-
 import dam2.add.p22.modelo.Usuario;
 import dam2.add.p22.utiles.Ruta;
 
@@ -145,13 +150,14 @@ public class Propiedades {
     private static boolean crearConexion() {
     	imprimeLog("i", "");
 	    try {
-	    	String bd = getParametroConexion(Ruta.PARAM_BD_NOM);//"p21";
+	    	String bd = getParametroConexion(Ruta.PARAM_BD_NOM);//"p22";
 	    	String login = getParametroConexion(Ruta.PARAM_BD_LGN);//"root";
 	    	String password = getParametroConexion(Ruta.PARAM_BD_PSW);
 	    	String host = getParametroConexion(Ruta.PARAM_BD_HST);//"127.0.0.1"; //localhost
-	        //cargo el driver
-	        Class.forName("com.mysql.cj.jdbc.Driver");
-	    	String url = "jdbc:mysql://";
+	    	String driver = getParametroConexion(Ruta.PARAM_BD_DVR);
+	        //cargo el driver "com.mysql.cj.jdbc.Driver"
+	        Class.forName(driver);
+	    	String url = getParametroConexion(Ruta.PARAM_BD_URL);
 	    	conexion = DriverManager.getConnection(url + host + "/"+ bd, login, password);
 	    	
 	    	//String url = "jdbc:sqlite:"+"./ficheros/misqlite.db";
@@ -200,7 +206,45 @@ public class Propiedades {
     		imprimeLog("f", "Error al cerrar la conexion");
         }
     }
+	public static void cambiaFileConfiguracion(String idioma, String persist) {
+		if (!persist.equals("memoria") && !persist.equals("bdd") && !persist.equals("hibernate")) {
+			persist = "bdd";
+		}
+		if (!idioma.equals("en") && !idioma.equals("es")) {
+			idioma = "es";
+		}
 
+		File fileConfigTemp = new File(Ruta.FICHERO_CONF + "temp");
+		File fileConfig = new File(Ruta.FICHERO_CONF);
+		try (BufferedWriter configTemp = new BufferedWriter(new FileWriter(fileConfigTemp, true))) {
+			try (BufferedReader config = new BufferedReader(new FileReader(fileConfig))) {
+				String linea = config.readLine();		
+				while (linea != null) {
+					if (linea.contains(Ruta.PARAM_IDIOMA) && linea.contains(idioma)) {
+						configTemp.write(Ruta.PARAM_IDIOMA + " = " + idioma);
+						configTemp.newLine();
+					} else if (linea.contains(Ruta.PARAM_PERSIS) && linea.contains(persist)) {
+						configTemp.write(Ruta.PARAM_PERSIS + " = " + persist);
+						configTemp.newLine();
+					} else {
+						configTemp.write("#" + linea);
+						configTemp.newLine();
+					}
+					linea = config.readLine();
+				}
+			} catch (FileNotFoundException e) {
+				System.out.println("No se puede acceder al archivo");
+			} catch (IOException e) {
+				System.out.println("Error de entrada/salida");
+			}		
+		} catch (FileNotFoundException e) {
+			System.out.println("No se puede acceder al archivo");
+		} catch (IOException e) {
+			System.out.println("Error de entrada/salida");
+		}
+		fileConfig.delete();
+		fileConfigTemp.renameTo(fileConfig);
+	}
  
     
     
@@ -265,12 +309,12 @@ public class Propiedades {
 /**/	// INSERTAR REGISTO INICIAL
 	public static void insertarInicial() throws SQLException {
 		ArrayList<Usuario> listaUsuariosInicial = new ArrayList<Usuario>();
-		listaUsuariosInicial.add(new Usuario("1", "bddAngel", "Blasco", "Cano", "angel@blasco.es", "111111111", "d8MeP4zGXPM4qJGUPLXAzawYDnp8tkyYiBBDxim3egFo0X0gXfVN3aRECNFtOPst", false, 5, "es"));
-		listaUsuariosInicial.add(new Usuario("2", "bddBeatriz", "Cano", "Domingo", "beatriz@cano.es", "222222222", "0QeuCMNAnCXA3YmUpOWfjs62ERUze8/HbC9W7IZLNZSMbPXEdw9jIKS/M24UBAdE", true, 5, "es"));
-		listaUsuariosInicial.add(new Usuario("3", "bddCarlos", "Domingo", "Egido", "carlos@domingo.es", "333333333", "hlf7dB1h/9ATZJU9sfefkCiA5uwMORe1mvc55lw5r6wdT4gbUPdRpS0wVVoH2Joz", false, 5, "en"));
-		listaUsuariosInicial.add(new Usuario("4", "bddDiego", "Egido", "Floren", "diego@egido.es", "444444444", "FFtzNLNPWwvmp6PhY6pST0Z9+tRPdBr/x3aDwX3wGRxnrHuN7yOnHQ9ABkCZeb6s", false, 5, "es"));
-		listaUsuariosInicial.add(new Usuario("5", "bddEric", "Floren", "Guilabert", "eric@floren.es", "555555555", "3FJ3w8drRJbs71crYBBP3LMVqOrgs0krmgObgMBVqFhsH51ushVT8VfwRFlThb7A", false, 5));
-		listaUsuariosInicial.add(new Usuario("6", "bddFrancisco", "Guilabert", "Huerta", "fran@guilabert.es", "666666666", "PyyMPRRBv7lIuZD9zsctKnnIqR4fsQ5bKt796AFAZcLIdaFKoUDaabd5zKJrUC8I", true, 5, "es"));
+		listaUsuariosInicial.add(new Usuario(1, "bddAngel", "Blasco", "Cano", "angel@blasco.es", "111111111", "d8MeP4zGXPM4qJGUPLXAzawYDnp8tkyYiBBDxim3egFo0X0gXfVN3aRECNFtOPst", false, 5, "es"));
+		listaUsuariosInicial.add(new Usuario(2, "bddBeatriz", "Cano", "Domingo", "beatriz@cano.es", "222222222", "0QeuCMNAnCXA3YmUpOWfjs62ERUze8/HbC9W7IZLNZSMbPXEdw9jIKS/M24UBAdE", true, 5, "es"));
+		listaUsuariosInicial.add(new Usuario(3, "bddCarlos", "Domingo", "Egido", "carlos@domingo.es", "333333333", "hlf7dB1h/9ATZJU9sfefkCiA5uwMORe1mvc55lw5r6wdT4gbUPdRpS0wVVoH2Joz", false, 5, "en"));
+		listaUsuariosInicial.add(new Usuario(4, "bddDiego", "Egido", "Floren", "diego@egido.es", "444444444", "FFtzNLNPWwvmp6PhY6pST0Z9+tRPdBr/x3aDwX3wGRxnrHuN7yOnHQ9ABkCZeb6s", false, 5, "es"));
+		listaUsuariosInicial.add(new Usuario(5, "bddEric", "Floren", "Guilabert", "eric@floren.es", "555555555", "3FJ3w8drRJbs71crYBBP3LMVqOrgs0krmgObgMBVqFhsH51ushVT8VfwRFlThb7A", false, 5));
+		listaUsuariosInicial.add(new Usuario(6, "bddFrancisco", "Guilabert", "Huerta", "fran@guilabert.es", "666666666", "PyyMPRRBv7lIuZD9zsctKnnIqR4fsQ5bKt796AFAZcLIdaFKoUDaabd5zKJrUC8I", true, 5, "es"));
 		imprimeLog("i", "insertarInicial");
 		for (int i = 0; i < listaUsuariosInicial.size(); i++) {
 
@@ -306,8 +350,8 @@ public class Propiedades {
 /**/	// BORRAR BASE DE DATOS
 	public static void borrarBaseDeDatos() throws SQLException {
 		// Borra la bbdd (comprueba que NO existe)
-		stDeclaracion.executeUpdate("DROP DATABASE p211");
-		imprimeLog("w", "DROP DATABASE p21");
+		stDeclaracion.executeUpdate("DROP DATABASE p222");
+		imprimeLog("w", "DROP DATABASE p22");
 	}
 	
 	

@@ -73,7 +73,7 @@ public class AccesoUsuario extends HttpServlet {
 			Propiedades.imprimeLog("i", "Entrando a Editarperfil", email);
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 			if (usuario.isRolAdmin() && id_us != null) {
-				Usuario usuarioEditable = Agenda.cargarUsuario(id_us);
+				Usuario usuarioEditable = Agenda.cargarUsuario(Integer.parseInt(id_us));
 				if (usuarioEditable != null) {
 					request.getSession().setAttribute("usuarioEditable", usuarioEditable);
 				} else {
@@ -92,13 +92,18 @@ public class AccesoUsuario extends HttpServlet {
 			Propiedades.imprimeLog("i", "Entrando a EditarPass", email);
 			request.getSession().setAttribute("opcion", "editarPass");
 			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		
+		} else if (opcion.equals("pintaEditarPersistencia")) {
+			Propiedades.imprimeLog("i", "Entrando a EditarPersistencia", email);
+			request.getSession().setAttribute("opcion", "editarPersistencia");
+			response.sendRedirect(request.getContextPath() + "/index.jsp");				
 			
 		} else if (opcion.equals("eliminar")) {
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 			Propiedades.imprimeLog("i", "eliminar", email);
 			if (usuario != null) {
-				if (usuario.isRolAdmin() && !usuario.getId_us().equals(id_us)) {
-					ArrayList<Usuario> listaUsuariosClientes = Agenda.eliminarUsuario(id_us);
+				if (usuario.isRolAdmin() && usuario.getId_us() != Integer.parseInt(id_us)) {
+					ArrayList<Usuario> listaUsuariosClientes = Agenda.eliminarUsuario(Integer.parseInt(id_us));
 					request.getSession().setAttribute("listaUsuariosClientes", listaUsuariosClientes);
 					request.getSession().setAttribute("opcion", "acceso_admin");
 					response.sendRedirect(request.getContextPath() + "/index.jsp");
@@ -233,8 +238,8 @@ public class AccesoUsuario extends HttpServlet {
 		} else if (opcion.equals("editar")) {
 			Propiedades.imprimeLog("i", "Petición de edicion de perfil", email);
 			Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-			if (usuario.isRolAdmin() || (!usuario.isRolAdmin() && usuario.getId_us().equalsIgnoreCase(id_us) )) {
-				usuarioTemp.setId_us(id_us);
+			if (usuario.isRolAdmin() || (!usuario.isRolAdmin() && usuario.getId_us() == Integer.parseInt(id_us))) {
+				usuarioTemp.setId_us(Integer.parseInt(id_us));
 				HashMap<String,String> mensaje = ComprobadorFormularios.formalizarEdicionPerfil(usuarioTemp);
 				if (mensaje.containsKey("error_email")) {
 					Propiedades.imprimeLog("w", "Error de edicion", email);

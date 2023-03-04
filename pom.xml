@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>ADD_P2.1_ENRIQUE_NAVARRO_ABELLAN</groupId>
-  <artifactId>ADD_P2.1_ENRIQUE_NAVARRO_ABELLAN</artifactId>
+  <groupId>ADD_P2.2_ENRIQUE_NAVARRO_ABELLAN</groupId>
+  <artifactId>ADD_P2.2_ENRIQUE_NAVARRO_ABELLAN</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java              mysql-->
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java              mysql
     <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>8.0.32</version>
-    </dependency>
+    </dependency>-->
     <!-- https://mvnrepository.com/artifact/org.jasypt/jasypt      encriptacion-->
     <dependency>
         <groupId>org.jasypt</groupId>
@@ -21,6 +21,66 @@
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
         <version>1.2.17</version>
+    </dependency> 
+    <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>5.1.6</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.3.1.Final</version>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/javassist/javassist -->
+    <dependency>
+        <groupId>javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>3.12.1.GA</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson             gson-->
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>2.10.1</version>
+    </dependency>
+<dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
+<dependency>
+    <groupId>javax.activation</groupId>
+    <artifactId>activation</artifactId>
+    <version>1.1</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
+<dependency>
+    <groupId>org.glassfish.jaxb</groupId>
+    <artifactId>jaxb-runtime</artifactId>
+    <version>2.3.0</version>
+</dependency>
+<dependency>
+        <groupId>com.sun.xml.messaging.saaj</groupId>
+        <artifactId>saaj-impl</artifactId>
+        <version>1.5.1</version>
     </dependency>
   </dependencies>
   <packaging>war</packaging>

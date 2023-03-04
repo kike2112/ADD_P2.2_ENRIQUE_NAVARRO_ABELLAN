@@ -7,6 +7,7 @@ import org.jasypt.util.password.StrongPasswordEncryptor;
 import dam2.add.p22.DAO.IUsuarioDAO;
 import dam2.add.p22.DAO.UsuarioDAOMemoria;
 import dam2.add.p22.DAO.UsuarioDAObdd;
+import dam2.add.p22.DAO.UsuarioDAOhibernate;
 import dam2.add.p22.modelo.Usuario;
 import dam2.add.p22.utiles.Utiles;
 
@@ -22,20 +23,18 @@ public final class Agenda {
 			} else if (Propiedades.getPersistencia().equals("bdd")) {
 				dao = new UsuarioDAObdd();
 				Propiedades.getConexion();
+			} else if (Propiedades.getPersistencia().equals("hibernate")) {
+				dao = new UsuarioDAOhibernate();
 			}
 		}
 	}
-	public static void cambiaPersistenciaAdmin() {
-		if (Propiedades.getPersistencia().equals("bdd")) {
+	public static void cambiaPersistenciaAdmin(String persistenciaNueva) {
+		if (persistenciaNueva.equals("memoria")) {
 			Propiedades.setPersistenciaAdmin("memoria");
-		} else if (Propiedades.getPersistencia().equals("memoria")) {
+		} else if (persistenciaNueva.equals("bdd")) {
 			Propiedades.setPersistenciaAdmin("bdd");
-		}
-		if (Propiedades.getPersistencia().equals("memoria")) {
-			dao = new UsuarioDAOMemoria();
-		} else if (Propiedades.getPersistencia().equals("bdd")) {
-			dao = new UsuarioDAObdd();
-			Propiedades.getConexion();
+		} else if (persistenciaNueva.equals("hibernate")) {
+			Propiedades.setPersistenciaAdmin("hibernate");
 		}
 		
 	}
@@ -87,12 +86,12 @@ public final class Agenda {
 	public static void borrarDAO() {
 		dao = null;
 	}
-	public static ArrayList<Usuario> eliminarUsuario(String id_us) {
+	public static ArrayList<Usuario> eliminarUsuario(int id_us) {
 		dao.borrarUsuario(id_us);
 		ArrayList<Usuario> listaUsuarios = getListaUsuariosClientes();
 		return listaUsuarios;
 	}
-	public static Usuario cargarUsuario(String id_us) {
+	public static Usuario cargarUsuario(int id_us) {
 		Usuario usuario = dao.getUsuarioById(id_us);
 		return usuario;
 	}
@@ -180,7 +179,7 @@ public final class Agenda {
 		boolean existe_email = false;
 		ArrayList<Usuario> listaUsuariosTemp = dao.getListaUsuarios();
 		for (int i = 0; i < listaUsuariosTemp.size(); i++) {
-			if (listaUsuariosTemp.get(i).getEmail().equals(usuario.getEmail()) && !listaUsuariosTemp.get(i).getId_us().equalsIgnoreCase(usuario.getId_us())) {
+			if (listaUsuariosTemp.get(i).getEmail().equals(usuario.getEmail()) && listaUsuariosTemp.get(i).getId_us() != usuario.getId_us()) {
 				existe_email = true;				
 			}
 		}

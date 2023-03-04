@@ -29,17 +29,23 @@ public class SelectorPersistencia extends HttpServlet {
 		
 		boolean modificacion = false;
 		String persist = request.getParameter("persist");
-		if (persist == null) {
-			persist = "";
-		}		
+		String idioma = request.getParameter("idioma");
+		String opcionPersist = request.getParameter("opcionPersist");
+		
+		if (opcionPersist == null) {
+			opcionPersist = "cambioRepo";
+		}
+		
 			
-		if (persist.equals("cambioRepo")){
+		if (opcionPersist.equals("cambioRepo")){
 			Propiedades.imprimeLog("w", "Cambio de persistencia");
 			Agenda.borrarDAO();
-			Agenda.cambiaPersistenciaAdmin();
+			Agenda.cambiaPersistenciaAdmin(persist);
+//			Propiedades.cambiaFileConfiguracion(idioma, persist);
+//			Agenda.iniciaPersistencia();
 			modificacion = true;
 			
-		} else if (persist.equals("resetBDD")) { //Resetea repositorio
+		} else if (opcionPersist.equals("resetBDD")) { //Resetea repositorio
 			Propiedades.imprimeLog("w", "Reiniciando la BDD");
 			Agenda.borrarDAO();
 			Propiedades.resetearBDD();
@@ -51,7 +57,7 @@ public class SelectorPersistencia extends HttpServlet {
 			request.getSession().setAttribute("usuario", null);
 		}
 		
-		response.sendRedirect(request.getContextPath() + "/index.jsp");
+		response.sendRedirect(request.getContextPath());
 	}
 
 	/**

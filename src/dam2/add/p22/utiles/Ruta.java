@@ -14,13 +14,15 @@ public class Ruta {
 	public static final String PARAM_BD_LGN = "bd.login";
 	public static final String PARAM_BD_PSW = "bd.pass";
 	public static final String PARAM_BD_HST = "bd.host";
+	public static final String PARAM_BD_DVR = "bd.driver";
+	public static final String PARAM_BD_URL = "bd.url";
 	
 	
 //	public static String getRutaReal() {
 //		return WEB_CONTENT;
 //	}
 	public static void setRutaReal(String ruta) {
-		RUTA = ruta + "/WEB-INF/classes/dam2/add/p21"; //La capturo desde el index.jsp
+		RUTA = ruta + "/WEB-INF/classes/dam2/add/p22"; //La capturo desde el index.jsp
 		FICHERO_BBDD = RUTA + "/properties/bbdd.properties"; 
 		FICHERO_CONF = RUTA + "/properties/config.properties"; 
 		FICHERO_LOG4 = RUTA + "/properties/log4j.properties";

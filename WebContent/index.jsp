@@ -70,6 +70,9 @@
     
 <%} else if (opcion.equals("editarPass")) {%>
     <jsp:include page="/jsp/editarPass.jsp"/>
+
+<%} else if (opcion.equals("editarPersistencia")) {%>
+    <jsp:include page="/jsp/editarPersistencia.jsp"/>
     
 <%} else if (opcion.equals("noTieneAcceso")) {%>
     <jsp:include page="/jsp/noAcceso.jsp"/>
