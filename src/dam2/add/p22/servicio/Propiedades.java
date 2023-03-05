@@ -21,6 +21,8 @@ import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+
+import dam2.add.p22.DAO.UsuarioDAOhibernate;
 import dam2.add.p22.modelo.Usuario;
 import dam2.add.p22.utiles.Ruta;
 
@@ -245,8 +247,7 @@ public class Propiedades {
 		fileConfig.delete();
 		fileConfigTemp.renameTo(fileConfig);
 	}
- 
-    
+
     
     /**/	// RESTAURAR BDD
 	public static void resetearBDD() {
@@ -300,7 +301,7 @@ public class Propiedades {
 				+ "telefono VARCHAR(255), "
 				+ "pass VARCHAR(255), "
 				+ "intentos INT, "
-				+ "rolAdmin INT, "
+				+ "rolAdmin BIT, "
 				+ "idioma VARCHAR(255), "
 				+ "PRIMARY KEY(id)"
 				+ ")");

@@ -15,7 +15,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "nombre", length = 50)
+	@Column(name = "nombre", length = 255)
 	private String nombre;
 	
 	@Column(name = "apellido", length = 255)
@@ -27,7 +27,7 @@ public class Usuario {
 	@Column(name = "email", length = 255, unique = true)
 	private String email;
 	
-	@Column(name = "telefono", length = 50)
+	@Column(name = "telefono", length = 255)
 	private String telefono;
 	
 	@Column(name = "pass", length = 255)
@@ -39,7 +39,7 @@ public class Usuario {
 	@Column(name = "rolAdmin")
 	private boolean rolAdmin;
 	
-	@Column(name = "idioma", length = 50)
+	@Column(name = "idioma", length = 255)
 	private String idioma;
 	
 	public Usuario() {

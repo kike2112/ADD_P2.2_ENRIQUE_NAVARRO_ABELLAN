@@ -62,7 +62,7 @@ public final class UsuarioDAOhibernate implements IUsuarioDAO {
 		usuario.setIntentos(5);
 		Session session = HibernateManager.getSessionFactory().openSession();
 		Transaction tx = session.beginTransaction();
-		Usuario usuarioN = (Usuario)session.save(usuario);
+		Integer id = (Integer)session.save(usuario);
 		Propiedades.imprimeLog("i", "H.save usuario...");
 		tx.commit();
 		session.close();
