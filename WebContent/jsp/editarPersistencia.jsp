@@ -17,19 +17,9 @@
 <head>
     <title><%=rb.getString("Editar_perfil")%></title>
 </head>
-<script>
-    function guardarCambios() {
-        var respuesta = confirm("<%=rb.getString("Seguro_que_desea_guardar_las_modificaciones")%>");
-        if (respuesta == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-</script>
 <div class="ventana">
     <div class="titulo">
-        <h2><%=rb.getString("CAMBIAR_REPOSITORIO")%></h2>
+        <h2><%=rb.getString("CAMBIAR_PERSISTENCIA")%></h2>
     </div>       
     <form action="<%=request.getContextPath()%>/SelectorPersistencia?opcionPersist=cambioRepo" method="get">
         <fieldset>   
@@ -62,4 +52,14 @@
             </div> 
         </fieldset>
     </form>
+    <script>
+    function guardarCambios() {
+        var respuesta = confirm("<%=rb.getString("Seguro_que_desea_guardar_las_modificaciones")%>");
+        if (respuesta == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    </script>
 </div>

@@ -22,7 +22,6 @@ import java.util.ResourceBundle;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import dam2.add.p22.DAO.UsuarioDAOhibernate;
 import dam2.add.p22.modelo.Usuario;
 import dam2.add.p22.utiles.Ruta;
 
@@ -303,6 +302,8 @@ public class Propiedades {
 				+ "intentos INT, "
 				+ "rolAdmin BIT, "
 				+ "idioma VARCHAR(255), "
+				+ "provincia VARCHAR(255), "
+				+ "poblacion VARCHAR(255), "
 				+ "PRIMARY KEY(id)"
 				+ ")");
 		imprimeLog("i", "CREATE TABLE IF NOT EXISTS usuario");
@@ -310,18 +311,18 @@ public class Propiedades {
 /**/	// INSERTAR REGISTO INICIAL
 	public static void insertarInicial() throws SQLException {
 		ArrayList<Usuario> listaUsuariosInicial = new ArrayList<Usuario>();
-		listaUsuariosInicial.add(new Usuario(1, "bddAngel", "Blasco", "Cano", "angel@blasco.es", "111111111", "d8MeP4zGXPM4qJGUPLXAzawYDnp8tkyYiBBDxim3egFo0X0gXfVN3aRECNFtOPst", false, 5, "es"));
-		listaUsuariosInicial.add(new Usuario(2, "bddBeatriz", "Cano", "Domingo", "beatriz@cano.es", "222222222", "0QeuCMNAnCXA3YmUpOWfjs62ERUze8/HbC9W7IZLNZSMbPXEdw9jIKS/M24UBAdE", true, 5, "es"));
-		listaUsuariosInicial.add(new Usuario(3, "bddCarlos", "Domingo", "Egido", "carlos@domingo.es", "333333333", "hlf7dB1h/9ATZJU9sfefkCiA5uwMORe1mvc55lw5r6wdT4gbUPdRpS0wVVoH2Joz", false, 5, "en"));
-		listaUsuariosInicial.add(new Usuario(4, "bddDiego", "Egido", "Floren", "diego@egido.es", "444444444", "FFtzNLNPWwvmp6PhY6pST0Z9+tRPdBr/x3aDwX3wGRxnrHuN7yOnHQ9ABkCZeb6s", false, 5, "es"));
-		listaUsuariosInicial.add(new Usuario(5, "bddEric", "Floren", "Guilabert", "eric@floren.es", "555555555", "3FJ3w8drRJbs71crYBBP3LMVqOrgs0krmgObgMBVqFhsH51ushVT8VfwRFlThb7A", false, 5));
-		listaUsuariosInicial.add(new Usuario(6, "bddFrancisco", "Guilabert", "Huerta", "fran@guilabert.es", "666666666", "PyyMPRRBv7lIuZD9zsctKnnIqR4fsQ5bKt796AFAZcLIdaFKoUDaabd5zKJrUC8I", true, 5, "es"));
+		listaUsuariosInicial.add(new Usuario(1, "bddAngel", "Blasco", "Cano", "angel@blasco.es", "111111111", "d8MeP4zGXPM4qJGUPLXAzawYDnp8tkyYiBBDxim3egFo0X0gXfVN3aRECNFtOPst", false, 5, "es", "Asturias", "Aller"));
+		listaUsuariosInicial.add(new Usuario(2, "bddBeatriz", "Cano", "Domingo", "beatriz@cano.es", "222222222", "0QeuCMNAnCXA3YmUpOWfjs62ERUze8/HbC9W7IZLNZSMbPXEdw9jIKS/M24UBAdE", true, 5, "es", "Burgos", "Carazo"));
+		listaUsuariosInicial.add(new Usuario(3, "bddCarlos", "Domingo", "Egido", "carlos@domingo.es", "333333333", "hlf7dB1h/9ATZJU9sfefkCiA5uwMORe1mvc55lw5r6wdT4gbUPdRpS0wVVoH2Joz", false, 5, "en", "Cuenca", "Fuentes"));
+		listaUsuariosInicial.add(new Usuario(4, "bddDiego", "Egido", "Floren", "diego@egido.es", "444444444", "FFtzNLNPWwvmp6PhY6pST0Z9+tRPdBr/x3aDwX3wGRxnrHuN7yOnHQ9ABkCZeb6s", false, 5, "es", "Toledo", "Bargas"));
+		listaUsuariosInicial.add(new Usuario(5, "bddEric", "Floren", "Guilabert", "eric@floren.es", "555555555", "3FJ3w8drRJbs71crYBBP3LMVqOrgs0krmgObgMBVqFhsH51ushVT8VfwRFlThb7A", false, 5, "en", "Navarra", "Allo"));
+		listaUsuariosInicial.add(new Usuario(6, "bddFrancisco", "Guilabert", "Huerta", "fran@guilabert.es", "666666666", "PyyMPRRBv7lIuZD9zsctKnnIqR4fsQ5bKt796AFAZcLIdaFKoUDaabd5zKJrUC8I", true, 5, "es", "Lugo", "Cervo"));
 		imprimeLog("i", "insertarInicial");
 		for (int i = 0; i < listaUsuariosInicial.size(); i++) {
 
-			String query = "INSERT INTO usuario (nombre, apellido, apellido2, email, telefono, pass, intentos, rolAdmin, idioma) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO usuario (nombre, apellido, apellido2, email, telefono, pass, intentos, rolAdmin, idioma, provincia, poblacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			imprimeLog("i", "Insertar registro:");
-			imprimeLog("i", "INSERT INTO usuario (nombre, apellido, apellido2, email, telefono, pass, intentos, rolAdmin, idioma) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			imprimeLog("i", query);
 			PreparedStatement ps = conexion.prepareStatement(query);
 
 			ps.setString(1, listaUsuariosInicial.get(i).getNombre());
@@ -333,6 +334,8 @@ public class Propiedades {
 			ps.setInt(7, listaUsuariosInicial.get(i).getIntentos());
 			ps.setBoolean(8, listaUsuariosInicial.get(i).isRolAdmin());
 			ps.setString(9, listaUsuariosInicial.get(i).getIdioma());
+			ps.setString(10, listaUsuariosInicial.get(i).getProvincia());
+			ps.setString(11, listaUsuariosInicial.get(i).getPoblacion());
 
 			if (ps.executeUpdate() == 0) {
 				imprimeLog("e", "NO se ha podido insertar datos");

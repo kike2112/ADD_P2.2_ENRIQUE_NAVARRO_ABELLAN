@@ -1,3 +1,4 @@
+<%@page import="dam2.add.p22.modelo.Ubicacion"%>
 <%@page import="dam2.add.p22.servicio.Propiedades"%>
 <%@page import="java.util.ResourceBundle"%>
 <%@page import="java.util.Locale"%>
@@ -10,6 +11,8 @@
     Usuario usuarioEditable = (Usuario) request.getSession().getAttribute("usuarioEditable");
     int id_us = usuarioEditable.getId_us();
     String error_email = (String) request.getAttribute("error_email");
+    Ubicacion[] provincias = (Ubicacion[]) request.getAttribute("provincias");
+    Ubicacion[] localidades = (Ubicacion[]) request.getAttribute("localidades");
     String idiomaSesion = (String) request.getSession().getAttribute("idioma");
     if (idiomaSesion == null) {
         idiomaSesion = "";
@@ -66,6 +69,46 @@
                 <label for="telefono"><%=rb.getString("Telefono")%>:</label>
                 <br>  
                 <input class="caja-texto" type="tel" id="telefono" name="telefono" placeholder="<%=rb.getString("Telefono")%>" value="<%=usuarioEditable.getTelefono()%>" title="<%=rb.getString("Puede_introducir_un_telefono")%>" pattern="[0-9]{9}">
+            </div>
+                        <div class="campo">
+                <label for="provincia"><%=rb.getString("Seleccione_Provincia")%>:</label>
+                <br> 
+                <select id="provincia" name="provincia"> 
+                    <option class="caja-texto" value="0" selected><%=rb.getString("Provincia")%></option>           
+<%
+    for (int i = 0; i < provincias.length; i++) {
+        if (usuarioEditable.getProvincia().equals(provincias[i].getNm())) {
+%>                
+            <option class="caja-texto" value="<%=provincias[i].getId()%>" selected><%=provincias[i].getNm()%></option>
+<%        	 	
+        } else {
+%>                
+            <option class="caja-texto" value="<%=provincias[i].getId()%>"><%=provincias[i].getNm()%></option>
+<%        	
+        }
+    }
+%>                 
+                </select>             
+            </div>
+            <div class="campo">
+                <label for="poblacion"><%=rb.getString("Seleccione_Poblacion")%>:</label>
+                <br> 
+                <select id="poblacion" name="poblacion">
+                    <option class="caja-texto" value="0" selected><%=rb.getString("Localidad")%></option>
+<%
+    for (int i = 0; i < localidades.length; i++) {
+    	if (usuarioEditable.getPoblacion().equals(localidades[i].getNm())) {
+%>                
+            <option class="caja-texto" value="<%=localidades[i].getId()%>" selected><%=localidades[i].getNm()%></option>
+<%              
+        } else {
+%>                
+            <option class="caja-texto" value="<%=localidades[i].getId()%>"><%=localidades[i].getNm()%></option>
+<%        	
+        }
+    }
+%>                 
+                </select>
             </div>
             <div class="botones2">
                 <div>

@@ -10,14 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jasypt.util.password.StrongPasswordEncryptor;
-
+import dam2.add.p22.modelo.Ubicacion;
 import dam2.add.p22.modelo.Usuario;
 import dam2.add.p22.servicio.Agenda;
 import dam2.add.p22.servicio.ComprobadorFormularios;
 import dam2.add.p22.servicio.Propiedades;
-
-
+import dam2.add.p22.servicio.UbicacionService;
 
 /**
  * Servlet implementation class AccesoUsuario
@@ -55,6 +53,10 @@ public class AccesoUsuario extends HttpServlet {
 	
 		if (opcion.equals("registro")) { //Deriva a la vista de registro
 			Propiedades.imprimeLog("i", "Entrando a registro", email);
+			Ubicacion[] provincias = UbicacionService.getUbicaciones("provincias");
+			Ubicacion[] localidades = UbicacionService.getUbicaciones("localidades");
+			request.setAttribute("provincias", provincias);
+			request.setAttribute("localidades", localidades);
 			request.setAttribute("usuarioTemp", usuarioTemp);
 			request.setAttribute("opcion", "registro");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -85,8 +87,12 @@ public class AccesoUsuario extends HttpServlet {
 			} else {
 				request.getSession().setAttribute("usuarioEditable", usuario);
 			}
+			Ubicacion[] provincias = UbicacionService.getUbicaciones("provincias");
+			Ubicacion[] localidades = UbicacionService.getUbicaciones("localidades");
+			request.setAttribute("provincias", provincias);
+			request.setAttribute("localidades", localidades);
 			request.getSession().setAttribute("opcion", "editarPerfil");
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 			
 		} else if (opcion.equals("pintaEditarPass")) {
 			Propiedades.imprimeLog("i", "Entrando a EditarPass", email);
@@ -157,13 +163,21 @@ public class AccesoUsuario extends HttpServlet {
 			email = "";
 		}
 	    String telefono = request.getParameter("telefono");
+	    String provincia = request.getParameter("provincia");
+	    if (provincia == null) {
+	    	provincia = "";
+		}
+	    String poblacion = request.getParameter("poblacion");
+	    if (poblacion == null) {
+	    	poblacion = "";
+		}
 	    String pass = ComprobadorFormularios.encriptarPass(request.getParameter("pass"));
 		String pass2 = request.getParameter("pass2");
 		if (pass2 == null) {
 			pass2 = "";
 		}
 
-	    Usuario usuarioTemp = new Usuario(nombre, apellido, apellido2, email, telefono, pass);       
+	    Usuario usuarioTemp = new Usuario(nombre, apellido, apellido2, email, telefono, pass, UbicacionService.getUbicacion(provincia), UbicacionService.getUbicacion(poblacion));       
 	
 		if (opcion.equals("agregar")) { //Formaliza el registro y lo añade a la Base de Datos, luego la manda a la vista de bienvenida.
 			Propiedades.imprimeLog("i", "Intentando registro", email);
@@ -175,6 +189,10 @@ public class AccesoUsuario extends HttpServlet {
 				request.setAttribute("error_pass", mensaje.get("error_pass"));
 				request.setAttribute("email", email);
 				request.setAttribute("usuarioTemp", usuarioTemp);
+				Ubicacion[] provincias = UbicacionService.getUbicaciones("provincias");
+				Ubicacion[] localidades = UbicacionService.getUbicaciones("localidades");
+				request.setAttribute("provincias", provincias);
+				request.setAttribute("localidades", localidades);
 				request.setAttribute("opcion", "registro");
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 				

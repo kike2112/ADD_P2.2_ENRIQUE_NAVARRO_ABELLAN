@@ -1,3 +1,4 @@
+<%@page import="dam2.add.p22.modelo.Ubicacion"%>
 <%@page import="dam2.add.p22.servicio.Propiedades"%>
 <%@page import="java.util.ResourceBundle"%>
 <%@page import="java.util.Locale"%>
@@ -9,6 +10,8 @@
     String error_pass = (String) request.getAttribute("error_pass");
     Usuario usuarioTemp = (Usuario) request.getAttribute("usuarioTemp");
     String email = usuarioTemp.getEmail();
+    Ubicacion[] provincias = (Ubicacion[]) request.getAttribute("provincias");
+    Ubicacion[] localidades = (Ubicacion[]) request.getAttribute("localidades");
     String idiomaSesion = (String) request.getSession().getAttribute("idioma");
     if (idiomaSesion == null) {
         idiomaSesion = "";
@@ -135,6 +138,36 @@
 <%
     }
 %>            
+            </div>
+            <div class="campo">
+                <label for="provincia"><%=rb.getString("Seleccione_Provincia")%>:</label>
+                <br> 
+                <select id="provincia" name="provincia"> 
+                    <option class="caja-texto" value="0" selected><%=rb.getString("Provincia")%></option>           
+<%
+    for (int i = 0; i < provincias.length; i++) {
+%>                
+                    <option class="caja-texto" value="<%=provincias[i].getId()%>"><%=provincias[i].getNm()%></option>
+<%
+    }
+%>                 
+                </select>             
+            </div>
+            <div class="campo">
+                <label for="poblacion"><%=rb.getString("Seleccione_Poblacion")%>:</label>
+                <br> 
+                <select id="poblacion" name="poblacion">
+                    <option class="caja-texto" value="0" selected><%=rb.getString("Localidad")%></option>
+<%
+    for (int i = 0; i < localidades.length; i++) {
+ //       if (localidades[i].getId().startsWith("03")) {
+%>                
+                    <option class="caja-texto" value="<%=localidades[i].getId()%>"><%=localidades[i].getNm()%></option>
+<%
+//        }
+    }
+%>                 
+                </select>
             </div>
             <div class="botones2">
                 <div>

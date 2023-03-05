@@ -40,7 +40,9 @@
 	        <div class="c_datos3">
 	            <ul>
 	                <li><%=rb.getString("Email")%>: <a href="mailto:<%=usuarioP.getEmail()%>"><%=usuarioP.getEmail()%></a></li>
-	                <li><%=rb.getString("Telefono")%>: <a href="tel:<%=usuarioP.getTelefono()%>"><%=usuarioP.getTelefono()%></a></li>   
+	                <li><%=rb.getString("Telefono")%>: <a href="tel:<%=usuarioP.getTelefono()%>"><%=usuarioP.getTelefono()%></a></li>
+                    <li><%=rb.getString("Provincia")%>: <%=usuarioP.getProvincia()%></li>
+                    <li><%=rb.getString("Localidad")%>: <%=usuarioP.getPoblacion()%></li>   
 	            </ul>
 	        </div>
 	        <div class="c_fin">

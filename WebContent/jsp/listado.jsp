@@ -116,7 +116,9 @@
         <div class="c_datos3">
             <ul>
                 <li><%=rb.getString("Email")%>: <a href="mailto:<%=listaUsuarios.get(i).getEmail()%>"><%=listaUsuarios.get(i).getEmail()%></a></li>
-                <li><%=rb.getString("Telefono")%>: <a href="tel:<%=listaUsuarios.get(i).getTelefono()%>"><%=listaUsuarios.get(i).getTelefono()%></a></li>   
+                <li><%=rb.getString("Telefono")%>: <a href="tel:<%=listaUsuarios.get(i).getTelefono()%>"><%=listaUsuarios.get(i).getTelefono()%></a></li>
+                <li><%=rb.getString("Provincia")%>: <%=listaUsuarios.get(i).getProvincia()%></li>
+                <li><%=rb.getString("Localidad")%>: <%=listaUsuarios.get(i).getPoblacion()%></li>   
             </ul>
         </div>  
         <div class="c_fin">

@@ -42,7 +42,7 @@
 <%
     if (usuario.isRolAdmin()) {
 %>                                      
-                    <li><a class="opcion-menu" href="<%=request.getContextPath()%>/AccesoUsuario?opcion=pintaEditarPersistencia"><%=rb.getString("CAMBIAR_REPOSITORIO")%></a></li>
+                    <li><a class="opcion-menu" href="<%=request.getContextPath()%>/AccesoUsuario?opcion=pintaEditarPersistencia"><%=rb.getString("CAMBIAR_PERSISTENCIA")%></a></li>
                     <li><a class="opcion-menu" href="<%=request.getContextPath()%>/SelectorPersistencia?opcionPersist=resetBDD"><%=rb.getString("resetBDD")%></a></li>                              
 <%      
     }

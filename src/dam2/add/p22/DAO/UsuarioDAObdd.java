@@ -37,8 +37,10 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 				int intentos = rs.getInt(8);
 				boolean rolAdmin = rs.getBoolean(9);
 				String idioma = rs.getString(10);
+				String provincia = rs.getString(11);
+				String poblacion = rs.getString(12);
 				
-				listaUsuarios.add(new Usuario(id_us, nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma));
+				listaUsuarios.add(new Usuario(id_us, nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma, provincia, poblacion));
 			}
 			rs.close();
 			ps.close();
@@ -77,8 +79,10 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 				int intentos = rs.getInt(8);
 				boolean rolAdmin = rs.getBoolean(9);
 				String idioma = rs.getString(10);
+				String provincia = rs.getString(11);
+				String poblacion = rs.getString(12);
 				
-				usuario = new Usuario(id_us, nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma);
+				usuario = new Usuario(id_us, nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma, provincia, poblacion);
 			}
 			rs.close();
 			ps.close();
@@ -116,8 +120,10 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 				int intentos = rs.getInt(8);
 				boolean rolAdmin = rs.getBoolean(9);
 				String idioma = rs.getString(10);
+				String provincia = rs.getString(11);
+				String poblacion = rs.getString(12);
 				
-				usuario = new Usuario(id_us, nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma);
+				usuario = new Usuario(id_us, nombre, apellido, apellido2, email, telefono, pass, rolAdmin, intentos, idioma, provincia, poblacion);
 			}
 			rs.close();
 			ps.close();
@@ -133,9 +139,9 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 	public boolean crearCliente(Usuario usuario) {
 		boolean exito = false;
 		conexion = Propiedades.getConexion();
-		String query = "INSERT INTO usuario (nombre, apellido, apellido2, email, telefono, pass, intentos, rolAdmin, idioma) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO usuario (nombre, apellido, apellido2, email, telefono, pass, intentos, rolAdmin, idioma, provincia, poblacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Propiedades.imprimeLog("i", "Insertar registro: INSERT INTO usuario...");
-		Propiedades.imprimeLog("i", "INSERT INTO usuario (nombre, apellido, apellido2, email, telefono, pass, intentos, rolAdmin, idioma) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		Propiedades.imprimeLog("i", query);
 		PreparedStatement ps;
 		try {
 			ps = conexion.prepareStatement(query);
@@ -148,6 +154,8 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 			ps.setInt(7, 5); //intentos
 			ps.setBoolean(8, usuario.isRolAdmin());
 			ps.setString(9, usuario.getIdioma());
+			ps.setString(10, usuario.getProvincia());
+			ps.setString(11, usuario.getPoblacion());
 
 			if (ps.executeUpdate() == 0) {
 				Propiedades.imprimeLog("e", "NO se ha podido insertar");
@@ -169,9 +177,9 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 	public boolean actualizarUsuario(Usuario usuario) {
 		boolean exito = false;
 		conexion = Propiedades.getConexion();
-		String query = "UPDATE usuario SET nombre=?, apellido=?, apellido2=?, email=?, telefono=?, pass=?, intentos=?, idioma=? WHERE id=?";
+		String query = "UPDATE usuario SET nombre=?, apellido=?, apellido2=?, email=?, telefono=?, pass=?, intentos=?, idioma=?, provincia=?, poblacion=? WHERE id=?";
 		Propiedades.imprimeLog("i", "Actualizar registro: UPDATE usuario...");
-		Propiedades.imprimeLog("i", "UPDATE usuario SET nombre=?, apellido=?, apellido2=?, email=?, telefono=?, pass=?, intentos=?, idioma=? WHERE id=?");
+		Propiedades.imprimeLog("i", query);
 		PreparedStatement ps;
 		try {
 			ps = conexion.prepareStatement(query);
@@ -183,7 +191,10 @@ public final class UsuarioDAObdd implements IUsuarioDAO {
 			ps.setString(6, usuario.getPass());
 			ps.setInt(7, usuario.getIntentos());
 			ps.setString(8, usuario.getIdioma());
-			ps.setInt(9, usuario.getId_us());
+			ps.setString(9, usuario.getProvincia());
+			ps.setString(10, usuario.getPoblacion());
+			ps.setInt(11, usuario.getId_us());
+			
 			
 			if (ps.executeUpdate() == 0) {
 				Propiedades.imprimeLog("e", "NO se ha podido actualizar");

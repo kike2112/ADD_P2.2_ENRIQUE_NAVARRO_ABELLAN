@@ -62,11 +62,11 @@
 <%} else if (opcion.equals("acceso")) {
 ///////////// Acceso cliente
 
-	} else if (opcion.equals("perfil")) {%>
+  } else if (opcion.equals("perfil")) {%>
     <jsp:include page="/jsp/perfil.jsp"/>
     
 <%} else if (opcion.equals("editarPerfil")) {%>
-    <jsp:include page="/jsp/editarPerfil.jsp"/>
+    <jsp:include page="/jsp/editarPerfil.jsp"/> 
     
 <%} else if (opcion.equals("editarPass")) {%>
     <jsp:include page="/jsp/editarPass.jsp"/>

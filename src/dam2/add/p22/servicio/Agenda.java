@@ -141,6 +141,8 @@ public final class Agenda {
 		usuarioTemp.setApellido2(usuario.getApellido2());
 		usuarioTemp.setEmail(usuario.getEmail());
 		usuarioTemp.setTelefono(usuario.getTelefono());
+		usuarioTemp.setProvincia(usuario.getProvincia());
+		usuarioTemp.setPoblacion(usuario.getPoblacion());
 		if (dao.actualizarUsuario(usuarioTemp)) {
 			exito = true;
 		}

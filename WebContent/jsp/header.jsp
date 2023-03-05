@@ -45,7 +45,8 @@
 <%
     if (usuarioHeader == null) {
 %>
-            <div>      
+            <div>
+                <jsp:include page="/jsp/hibernate.jsp"/>      
                 <a class="opcion-cabecera" href="<%=request.getContextPath()%>/AccesoUsuario?opcion=login">LOGIN</a>      
 <%      if (emailHeader == null) {%>                         
                 <a class="opcion-cabecera" href="<%=request.getContextPath()%>/AccesoUsuario?opcion=registro&email=null"><%=rb.getString("REGISTRO")%></a>
@@ -57,6 +58,7 @@
     } else if (usuarioHeader != null) {
 %>            
             <div>
+                <jsp:include page="/jsp/hibernate.jsp"/>
                 <a class="opcion-cabecera" href="<%=request.getContextPath()%>/AccesoUsuario?opcion=perfil"><%=usuarioHeader.getNombre().toUpperCase()%></a>          
                 <a class="opcion-cabecera" href="<%=request.getContextPath()%>/AccesoUsuario?opcion=cerrarSesion"><%=rb.getString("CERRAR_SESION")%></a>         
             </div>

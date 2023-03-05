@@ -42,6 +42,12 @@ public class Usuario {
 	@Column(name = "idioma", length = 255)
 	private String idioma;
 	
+	@Column(name = "provincia", length = 255)
+	private String provincia;
+	
+	@Column(name = "poblacion", length = 255)
+	private String poblacion;
+	
 	public Usuario() {
 		super();
 	}
@@ -51,7 +57,7 @@ public class Usuario {
 		this.pass = pass;
 	}
 	public Usuario(String nombre, String apellido, String apellido2, String email, String telefono,
-			String pass) {
+			String pass, String provincia, String poblacion) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -59,6 +65,8 @@ public class Usuario {
 		this.email = email;
 		this.telefono = telefono;
 		this.pass = pass;
+		this.provincia = provincia;
+		this.poblacion = poblacion;
 	}
 	public Usuario(String nombre, String apellido, String apellido2, String email, String telefono,
 			String pass, boolean rolAdmin, int intentos) {
@@ -86,7 +94,7 @@ public class Usuario {
 		this.intentos = intentos;
 	}
 	public Usuario(int id, String nombre, String apellido, String apellido2, String email, String telefono,
-			String pass, boolean rolAdmin, int intentos, String idioma) {
+			String pass, boolean rolAdmin, int intentos, String idioma, String provincia, String poblacion) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -98,8 +106,9 @@ public class Usuario {
 		this.rolAdmin = rolAdmin;
 		this.intentos = intentos;
 		this.idioma = idioma;
+		this.provincia = provincia;
+		this.poblacion = poblacion;
 	}
-	
 	public Usuario(String nombre, String apellido, String apellido2, String email, String telefono) {
 		super();
 		this.nombre = nombre;
@@ -168,8 +177,20 @@ public class Usuario {
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
 	}
+	public String getProvincia() {
+		return provincia;
+	}
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+	public String getPoblacion() {
+		return poblacion;
+	}
+	public void setPoblacion(String poblacion) {
+		this.poblacion = poblacion;
+	}
 	@Override
 	public String toString() {
-		return this.email + this.nombre + this.apellido + this.apellido2 + this.telefono;
+		return this.email + this.nombre + this.apellido + this.apellido2 + this.telefono + this.provincia + this.poblacion;
 	}
 }

@@ -17,6 +17,9 @@ public class Ruta {
 	public static final String PARAM_BD_DVR = "bd.driver";
 	public static final String PARAM_BD_URL = "bd.url";
 	
+	public static final String URL_PROVINCIA = "https://raw.githubusercontent.com/IagoLast/pselect/master/data/provincias.json"; 
+	public static final String URL_LOCALIDAD = "https://raw.githubusercontent.com/IagoLast/pselect/master/data/municipios.json";
+	
 	
 //	public static String getRutaReal() {
 //		return WEB_CONTENT;
